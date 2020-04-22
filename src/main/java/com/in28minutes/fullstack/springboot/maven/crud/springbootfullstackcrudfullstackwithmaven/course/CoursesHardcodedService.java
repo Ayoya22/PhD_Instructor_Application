@@ -15,8 +15,7 @@ public class CoursesHardcodedService {
         courses.add(new Course(++idCounter, "Simplice.PhD", "Learn Full stack with Spring Boot and Angular"));
         courses.add(new Course(++idCounter, "Simplice.PhD", "Learn Full stack with Spring Boot and React"));
         courses.add(new Course(++idCounter, "Simplice.PhD", "Master Microservices with Spring Boot and Spring Cloud"));
-        courses.add(new Course(++idCounter, "iSimplice.PhD",
-                "Deploy Spring Boot Microservices to Cloud with Docker and Kubernetes"));
+        courses.add(new Course(++idCounter, "Simplice.PhD","Deploy Spring Boot Microservices to Cloud with Docker and Kubernetes"));
     }
 
     public List<Course> findAll() {
