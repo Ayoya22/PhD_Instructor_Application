@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200" })
@@ -43,5 +45,19 @@ public class CourseResource {
         Course courseUpdated = courseManagementService.save(course);
 
         return new ResponseEntity<Course>(courseUpdated, HttpStatus.OK);
+    }
+
+    @PostMapping("/instructors/{username}/courses")
+    public ResponseEntity<Void> createCourse(@PathVariable String username, @RequestBody Course course) {
+
+        Course createdCourse = courseManagementService.save(course);
+
+        // Location
+        // Get current resource url
+        /// {id}
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdCourse.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).build();
     }
 }
