@@ -1,6 +1,7 @@
 package com.in28minutes.fullstack.springboot.maven.crud.springbootfullstackcrudfullstackwithmaven.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,5 +34,14 @@ public class CourseResource {
     @GetMapping("/instructors/{username}/courses/{id}")
     public Course getCourse(@PathVariable String username, @PathVariable long id) {
         return courseManagementService.findById(id);
+    }
+
+    @PutMapping("/instructors/{username}/courses/{id}")
+    public ResponseEntity<Course> updateCourse(@PathVariable String username, @PathVariable long id,
+                                               @RequestBody Course course) {
+
+        Course courseUpdated = courseManagementService.save(course);
+
+        return new ResponseEntity<Course>(courseUpdated, HttpStatus.OK);
     }
 }
